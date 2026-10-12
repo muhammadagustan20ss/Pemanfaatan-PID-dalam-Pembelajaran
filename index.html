@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mengoptimalkan Pembelajaran Interaktif dengan PTD</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1d2433;--mu:#5d6679;--ac:#2f6fed;--ac2:#12a37f;--bad:#d9455f;--bd:#dfe3ec;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10141d;--card:#1a2030;--tx:#eef1f8;--mu:#a3adc2;--ac:#6b9bff;--ac2:#3fd0a8;--bad:#ff7a90;--bd:#2c3550}}
+:root[data-theme="dark"]{--bg:#10141d;--card:#1a2030;--tx:#eef1f8;--mu:#a3adc2;--ac:#6b9bff;--ac2:#3fd0a8;--bad:#ff7a90;--bd:#2c3550}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--bd)}
+.bar{flex:1;height:6px;background:var(--bd);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--ac);transition:.3s}
+button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:8px 14px}
+button:hover{border-color:var(--ac)}button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{flex:1;overflow-y:auto;padding:18px 16px}
+.s{display:none;max-width:900px;margin:0 auto;animation:f .3s}.s.a{display:block}@keyframes f{from{opacity:0;transform:translateY(8px)}}
+h1{font-size:clamp(1.6rem,5vw,2.6rem);margin:.2em 0}h2{font-size:clamp(1.3rem,4vw,1.9rem);margin:0 0 14px}
+.sub{color:var(--mu);font-size:1.1rem}.tag{display:inline-block;background:var(--ac);color:#fff;border-radius:99px;padding:3px 12px;font-size:.8rem}
+.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}
+.c.k{cursor:pointer;min-height:110px}.c.k small{color:var(--mu)}
+ul{margin:6px 0;padding-left:20px}li{margin:4px 0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.sw{display:flex;gap:6px;margin-bottom:12px}
+.note{display:none;background:var(--card);border-left:4px solid var(--ac2);border-radius:10px;padding:12px 14px;margin-top:16px;color:var(--mu);line-height:1.55}
+body.n .note{display:block}.note b{color:var(--ac2)}
+footer{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-top:1px solid var(--bd);gap:8px}
+.ok{color:var(--ac2);font-weight:600}.no{color:var(--bad);font-weight:600}
+.pl{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.cnt{font-weight:700;color:var(--ac)}
+</style></head><body>
+<header><span class="tag">PTD</span><div class="bar"><i id="pb"></i></div><span id="pn" class="sub" style="font-size:.9rem"></span>
+<button id="nt" title="Tampilkan speaker notes (N)">🎤 Notes</button><button id="th" title="Tema">🌓</button></header>
+<main id="m"></main>
+<footer><button id="pv">← Sebelumnya</button><span class="sub" style="font-size:.8rem">Gunakan tombol ← → keyboard</span><button id="nx" class="on">Lanjut →</button></footer>
+<script>
+const N=[
+"Selamat pagi/siang Bapak dan Ibu Guru sekalian. Papan tulis telah menjadi sahabat utama guru selama berabad-abad, dari papan kapur, whiteboard, hingga kini Papan Tulis Digital (PTD) atau Interactive Whiteboard. Hari ini kita membahas bagaimana PTD bukan sekadar pengganti spidol dan penghapus, melainkan pintu gerbang menuju pembelajaran yang lebih interaktif, adaptif, dan kolaboratif bagi siswa kita.",
+"Mengapa perlu beralih atau memanfaatkan PTD? Pada papan tulis biasa catatan hilang saat dihapus, sedangkan di PTD semua jejak pemikiran dan diskusi kelas tersimpan otomatis. Fitur infinite canvas juga membuat kita tidak perlu membatasi ide siswa hanya karena papan sudah penuh.",
+"Ada 4 prinsip utama pemanfaatan PTD yang efektif. PTD yang baik bukan hanya dipakai menulis materi seperti kertas biasa, tetapi untuk visualisasi dinamis, kolaborasi antar siswa, menyesuaikan gaya belajar, serta mendokumentasikan proses berpikir siswa dari awal hingga akhir pelajaran.",
+"Bagaimana menerapkan PTD dari awal hingga akhir jam pelajaran? Di awal, gunakan untuk mencoret peta konsep. Di kegiatan inti, lakukan live annotation, misalnya menandai bagian kalimat pada pelajaran Bahasa Indonesia atau menunjuk organ tubuh pada gambar IPA. Di akhir kelas, hasil coretan dan rangkuman diekspor menjadi PDF dan dibagikan ke grup WhatsApp atau Google Classroom.",
+"PTD sangat fleksibel untuk semua mata pelajaran. Di Matematika, guru bisa memakai penggaris dan jangka digital. Di pelajaran Bahasa, siswa menempelkan sticky notes digital untuk menyusun alur cerita. Di IPS, kita bisa memperbesar (zoom) peta digital hingga detail wilayah terkecil.",
+"Bapak dan Ibu tidak perlu berkecil hati jika sekolah belum punya layar sentuh interaktif yang mahal. Aplikasi seperti Microsoft Whiteboard, Canva Whiteboard, atau Miro bisa dijalankan hanya dengan laptop dan proyektor biasa, bahkan siswa bisa ikut berpartisipasi memakai smartphone masing-masing.",
+"Beberapa tips praktis: pertama, buat template terlebih dahulu sebelum masuk kelas agar waktu tidak habis untuk menggambar tabel. Kedua, pastikan guru tidak mendominasi PTD sendirian. Biarkan siswa memegang pena digital atau mengirim jawaban mereka ke papan.",
+"Sebagai penutup, canggihnya PTD tidak bermakna tanpa pedagogi yang tepat dari guru. PTD adalah alat untuk memicu keterlibatan aktif siswa. Mari mulai dari langkah kecil dengan mencoba satu fitur PTD di kelas kita. Terima kasih, mari kita buka sesi tanya jawab."];
+const cmp={Konvensional:["Komunikasi satu arah","Ruang terbatas (harus sering dihapus)","Catatan hilang begitu kelas usai"],"Digital (PTD)":["Interaksi multi-arah (guru & siswa)","Kanvas tak terbatas (Infinite Canvas)","Dokumentasi otomatis, bisa disimpan & dibagikan sebagai PDF/Gambar"]};
+const pr=[["🎬","Visualisasi Multimedia","Mengintegrasikan teks, gambar, video, dan objek 3D secara langsung."],["🤝","Kolaborasi Real-Time","Siswa aktif di layar utama maupun dari perangkat masing-masing."],["🎨","Pembelajaran Berdiferensiasi","Mengakomodasi gaya belajar visual, auditori, dan kinestetik."],["👣","Jejak Belajar Kognitif","Menyimpan tahapan penyelesaian masalah untuk bahan refleksi."]];
+const fl={"Kegiatan Awal":["Apersepsi & Pematik",["Menampilkan gambar/video pemicu","Mind mapping ide awal siswa"]],"Kegiatan Inti":["Eksplorasi & Kolaborasi",["Live annotation (menandai/menulis di atas materi, dokumen, soal)","Simulasi interaktif & manipulasi objek visual","Kerja kelompok langsung di kanvas PTD"]],"Kegiatan Penutup":["Refleksi & Asesmen",["Kuis interaktif berbasis papan digital","Ekspor materi & catatan kelas ke grup siswa/LMS"]]};
+const mp={"Sains & Matematika":["Penggaris/Busur Digital, Simulasi, Diagram","Menggambar grafik fungsi, simulasi tata surya, pencoretan rumus"],"Bahasa & Sastra":["Text Highlighter, Sticky Notes, Mind Map","Bedah struktur teks, brainstorming ide karangan kelompok"],"IPS & Geografi":["Peta Interaktif, Zoom-in/out, Media Imersif","Membedah peta topografi, analisis sejarah lewat garis waktu digital"],"Seni & Desain":["Tool Gambar/Kuis Warna, Shape Recognition","Sketsa digital bersama, eksplorasi komposisi warna"]};
+const ap=[["Microsoft Whiteboard","Integrasi baik dengan ekosistem MS Office"],["Miro / Mural","Sangat baik untuk brainstorming & proyek kelompok"],["Canva Whiteboard","Kaya elemen visual dan template"],["OpenBoard / Zoom Whiteboard","Ringan dan gratis untuk penggunaan harian"]];
+const qz=[["Siapkan template kanvas sebelum kelas dimulai.",1],["Menggunakan PTD hanya sebagai 'layar tancap' (guru membaca slide).",0],["Libatkan siswa maju menyentuh/mengisi PTD.",1],["Menumpuk teks padat dalam satu kanvas.",0]];
+const votes={};ap.forEach(a=>votes[a[0]]=0);
+const tabs=(id,keys,cur)=>`<div class="tabs" id="${id}">${keys.map(k=>`<button data-k="${k}" class="${k==cur?'on':''}">${k}</button>`).join("")}</div>`;
+const S=[];
+S[0]=()=>`<span class="tag">Modul Presentasi</span><h1>Mengoptimalkan Pembelajaran Interaktif dengan Papan Tulis Digital (PTD)</h1><p class="sub">Transformasi Media Ajar Konvensional Menjadi Ruang Kolaborasi Digital</p><div class="c"><b>Presenter:</b> Muh. Agustan, S.Pd<br><b>Target Audien:</b> Guru / Pendidik</div>`;
+S[1]=()=>`<h2>Peralihan dari Konvensional ke Digital</h2><p class="sub">Ketuk tombol untuk membandingkan.</p><div class="sw" id="sw">${Object.keys(cmp).map((k,i)=>`<button data-k="${k}" class="${i?'':'on'}">${k}</button>`).join("")}</div><div class="c" id="o"></div>`;
+S[2]=()=>`<h2>4 Prinsip Utama Pemanfaatan PTD</h2><p class="sub">Ketuk kartu untuk melihat penjelasannya.</p><div class="g">${pr.map((p,i)=>`<div class="c k" data-i="${i}"><div style="font-size:2rem">${p[0]}</div><b>${i+1}. ${p[1]}</b><div class="d" style="display:none;margin-top:6px">${p[2]}</div><small class="h">Ketuk untuk buka</small></div>`).join("")}</div>`;
+S[3]=()=>`<h2>PTD dalam Alur Pembelajaran</h2>${tabs("fl",Object.keys(fl),"Kegiatan Awal")}<div class="c" id="o"></div>`;
+S[4]=()=>`<h2>Strategi untuk Berbagai Mata Pelajaran</h2>${tabs("mp",Object.keys(mp),"Sains & Matematika")}<div class="c" id="o"></div>`;
+S[5]=()=>`<h2>Aplikasi & Platform PTD Populer</h2><p class="sub">Berbasis cloud, bisa dibuka dari browser/HP/laptop.</p><div class="g">${ap.map(a=>`<div class="c"><b>${a[0]}</b><br><span class="sub" style="font-size:.95rem">${a[1]}</span></div>`).join("")}</div><div class="c" style="margin-top:12px"><b>Hardware pendukung:</b> Interactive Flat Panel (IFP), proyektor interaktif, atau pen tablet.</div>`;
+S[6]=()=>`<h2>Tips & Etika: Do's atau Don'ts?</h2><p class="sub">Tentukan setiap pernyataan, lalu lihat jawabannya.</p>${qz.map((q,i)=>`<div class="c pl" style="margin-bottom:10px" data-i="${i}"><span>${q[0]}</span><span class="r"><button data-a="1">👍 Do</button> <button data-a="0">👎 Don't</button></span></div>`).join("")}`;
+S[7]=()=>`<h2>Kesimpulan & Sesi Diskusi</h2><div class="c"><ul><li>PTD merevolusi peran papan tulis dari alat catat menjadi ruang kolaborasi.</li><li>Kunci keberhasilan ada pada interaktivitas, bukan pada canggihnya merek perangkat.</li></ul></div><div class="c" style="margin-top:12px"><b>Aplikasi atau fitur PTD mana yang ingin Anda coba di kelas minggu ini?</b><div id="vt" style="margin-top:10px"></div></div>`;
+let i=0;const m=document.getElementById("m");
+m.innerHTML=S.map((f,k)=>`<section class="s" id="s${k}">${f()}<div class="note"><b>Speaker Notes:</b><br>${N[k]}</div></section>`).join("");
+const $=(k)=>document.getElementById("s"+k);
+function sw(){const o=$(1).querySelector("#o"),k=$(1).querySelector("#sw .on").dataset.k;o.innerHTML=`<b>${k}</b><ul>${cmp[k].map(x=>`<li>${x}</li>`).join("")}</ul>`}
+function tb(k,id,d,fn){const e=$(k),o=e.querySelector("#o");const r=t=>{e.querySelectorAll("#"+id+" button").forEach(b=>b.classList.toggle("on",b.dataset.k==t));o.innerHTML=fn(t)};r(Object.keys(d)[0]);e.querySelector("#"+id).onclick=ev=>{if(ev.target.dataset.k)r(ev.target.dataset.k)}}
+$(1).querySelector("#sw").onclick=e=>{if(e.target.dataset.k){$(1).querySelectorAll("#sw button").forEach(b=>b.classList.toggle("on",b==e.target));sw()}};sw();
+tb(3,"fl",fl,t=>`<b>${t}</b> — <i>${fl[t][0]}</i><ul>${fl[t][1].map(x=>`<li>${x}</li>`).join("")}</ul>`);
+tb(4,"mp",mp,t=>`<b>Fitur PTD:</b> ${mp[t][0]}<br><br><b>Contoh aktivitas:</b> ${mp[t][1]}`);
+$(2).onclick=e=>{const c=e.target.closest(".k");if(!c)return;const d=c.querySelector(".d"),o=d.style.display=="none";d.style.display=o?"block":"none";c.querySelector(".h").style.display=o?"none":"block"};
+$(6).onclick=e=>{const b=e.target.closest("button");if(!b)return;const r=b.closest(".c"),q=qz[r.dataset.i],ok=+b.dataset.a==q[1];r.querySelector(".r").innerHTML=`<span class="${ok?'ok':'no'}">${ok?'✔ Benar':'✘ Kurang tepat'} (${q[1]?'Do':"Don't"})</span>`};
+function vt(){$(7).querySelector("#vt").innerHTML=ap.map(a=>`<div class="pl" style="margin:6px 0"><button data-k="${a[0]}">${a[0]}</button><span class="cnt">${votes[a[0]]}</span></div>`).join("")}
+$(7).onclick=e=>{const k=e.target.dataset&&e.target.dataset.k;if(k&&k in votes){votes[k]++;vt()}};vt();
+function go(n){i=Math.max(0,Math.min(S.length-1,n));document.querySelectorAll(".s").forEach((s,k)=>s.classList.toggle("a",k==i));pb.style.width=((i+1)/S.length*100)+"%";pn.textContent=(i+1)+"/"+S.length;m.scrollTop=0}
+pv.onclick=()=>go(i-1);nx.onclick=()=>go(i+1);
+nt.onclick=()=>{document.body.classList.toggle("n");nt.classList.toggle("on")};
+th.onclick=()=>{const d=document.documentElement,dk=getComputedStyle(d).getPropertyValue("--bg").trim()=="#10141d";d.dataset.theme=dk?"light":"dark"};
+document.onkeydown=e=>{if(e.key=="ArrowRight")go(i+1);if(e.key=="ArrowLeft")go(i-1);if(e.key=="n"||e.key=="N")nt.click()};
+go(0);
+</script></body></html>
